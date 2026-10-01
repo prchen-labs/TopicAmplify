@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+html,body { height:100%; padding:0;margin:0;}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+html {
+    font-family: "Lucida Sans", sans-serif;
+    background-color: #ffffff/*#a8d6af*/;
+}
+
+#header {
+    background-color: #26502c;
+    color: #ffffff;
+    padding: 15px;
+    display: flex;
+    font-weight:bold;
+    /*font-family: DFKai-sb;*/
+}
+
+#header a:link, a:visited {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: auto;
+}
+
+#header a:link:active, a:visited:active {
+    color: #ffffff;
+}
+
+#header .icon {
+    font-size:48px;
+}
+
+#header .left-content {
+    font-size: 39px;
+    box-sizing: border-box;
+    position: relative;
+    right: 0;
+    display: flex;
+    justify-content: start;
+    height: 64px;
+    padding: 8px;
+}
+
+.container {
+    height: 440px;
+    width: 400px;
+    background: transparent;
+    position: relative;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, .6);
+    /* 霧面玻璃效果 */
+    backdrop-filter: blur(30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*overflow: hidden; */
+    transition: height .3s ease;
+}
+
+.container .active {
+    height: 520px;
+}
+
+.container .active .login-box {
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.container .close {
+    height: 40px;
+    width: 40px;
+    top: 0;
+    right: 0;
+    font-size: 2em;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(122, 28, 28);
+    border-bottom-left-radius: 15px;
+    cursor: pointer;
+}
+
+.container .login-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.login-box h1 {
+    text-align: center;
+    font-size: 2em;
+}
+/*
+.container .login-box {
+    display: none;
+}
+*/
+.container .register-box{
+    position: absolute;
+    transform: translateX(400px);
+}
+
+.input {
+    height: 50px;
+    width: 100%;
+    border-bottom: 2px solid black;
+    position: relative;
+    margin: 30px 0;
+}
+
+.input input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.input .icon {
+    font-size: 1.1em;
+    position: absolute;
+    right: 10px;
+    line-height: 60px;
+}
+
+.input label {
+    font-size: 1.1em;
+    font-weight: bold;
+    top: -10px;
+    left: -3px;
+    position: absolute;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.help {
+    font-size: .8em;
+    font-weight: 600;
+    display: flex;
+    margin: -25px 0 15px;
+}
+
+.help a {
+    text-decoration: none;
+    color: rgb(5, 5, 80);
+}
+
+.help a:hover {
+    text-decoration: underline;
+}
+
+.buttonLogin {
+    height: 40px;
+    width: 100%;
+    background: #203f56;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: aliceblue;
+}
+
+.register {
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    margin: 30px 0 10px;
+}
+
+.register a{
+    font-weight: 600;
+    color: rgb(5, 5, 80);
+    text-decoration: none;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+.buttonRegister {
+    height: 40px;
+    width: 100%;
+    background: #203f56;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: aliceblue;
+}

@@ -1,0 +1,448 @@
+html, body {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+* {
+	box-sizing: border-box;
+}
+.row::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+/* 0403*/
+.row {
+	display: flex;
+}
+/* 親和力顏色 */
+html {
+	font-family: "Lucida Sans", sans-serif;
+	background-color: #fff;/*灰*//*整體大背景顏色*/
+}
+#header {
+	background-color: #26502c;/* 更改大標題列背景色 */
+	color: #ffffff;/*word color*/
+	padding: 15px;
+	display: flex;
+	font-weight: bold;
+	/*font-family: DFKai-sb;*/
+}
+
+#header .icon {
+	font-size: 48px;
+}
+#header .left-content {
+	font-size: 39px;
+	box-sizing: border-box;
+	position: relative;
+	right: 0;
+	display: flex;
+	justify-content: start;
+	height: 64px;
+	padding: 8px;
+}
+#header .center-content {
+	box-sizing: border-box;
+	position: relative;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	height: 64px;
+	padding: 8px;
+}
+#header .right-content {
+	box-sizing: border-box;
+	position: relative;
+	right: 0;
+	display: flex;
+	justify-content: end;
+	height: 64px;
+	padding: 8px;
+}
+#header .right-content:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+#header:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+.topnav {
+	width: 100%;
+	height: 60px;
+	font-size: 30px;
+	background-color:  #a8d6af;/* 更改頂部導覽列背景色 */
+	color: #fff;/* white word */
+	padding: 12px;
+	overflow: hidden;
+}
+.toplink {
+	padding-left: 18px;
+	padding-right: 18px;
+}
+#content {
+	float: left;
+	height: calc(100% - 154px);
+	background-color: #ffffff;/*content 的背景 */
+	padding: 5px;
+}
+#content div {
+	float: left;
+	border: 3px solid #8AC007;
+	margin: 3px;
+	background-color: #ffffff;
+}
+#content p {
+	float: left;
+	padding: 5px;
+}
+#content .title {
+	font-size: large;
+	font-weight: bold;
+}
+#content .summary {
+	border-style: none solid none solid;
+	border-width: 2px;
+}
+#content .time {
+	font-weight: bold;
+}
+/* For mobile phones: */
+[class*="col-"] {
+	width: 100%;
+}
+@media only screen and (max-width: 768px) {
+	#header .left-content img {
+		width: auto;
+	}
+	#header .left-content {
+		font-size: 0px;
+	}
+	#header .center-content #search-box {
+		width: 0;
+		opacity: 0;
+	}
+	#sidebar {
+		display: none;
+	}
+	.col-s-1 {
+		width: 8.33%;
+	}
+	.col-s-2 {
+		width: 16.66%;
+	}
+	.col-s-3 {
+		width: 25%;
+	}
+	.col-s-4 {
+		width: 33.33%;
+	}
+	.col-s-5 {
+		width: 41.66%;
+	}
+	.col-s-6 {
+		width: 50%;
+	}
+	.col-s-7 {
+		width: 58.33%;
+	}
+	.col-s-8 {
+		width: 66.66%;
+	}
+	.col-s-9 {
+		width: 75%;
+	}
+	.col-s-10 {
+		width: 83.33%;
+	}
+	.col-s-11 {
+		width: 91.66%;
+	}
+	.col-s-12 {
+		width: 100%;
+	}
+}
+@media only screen and (min-width: 768px) {
+	/* For tablets: */
+	#header .left-content img {
+		width: 0;
+	}
+	#header .left-content {
+		font-size: 39px;
+	}
+	#header .center-content #search-box {
+		width: 90%;
+		opacity: 100;
+	}
+	#sidebar {
+		display: none;
+	}
+}
+@media (max-width: 1200px) {
+	#sidebar {
+		display: none;
+	}
+	#content {
+		width: 100%;
+	}
+}
+@media only screen and (min-width: 1200px) {
+	/* For desktop: */
+	.left-content img {
+		width: auto;
+	}
+	#header .left-content img {
+		width: auto;
+	}
+	#header .left-content {
+		font-size: 39px;
+	}
+	#header .center-content #search-box {
+		width: 90%;
+		opacity: 100;
+	}
+	#sidebar {
+		display: block;
+	}
+	.col-1 {
+		width: 8.33%;
+	}
+	.col-2 {
+		width: 16.66%;
+	}
+	.col-3 {
+		width: 25%;
+	}
+	.col-4 {
+		width: 33.33%;
+	}
+	.col-5 {
+		width: 41.66%;
+	}
+	.col-6 {
+		width: 50%;
+	}
+	.col-7 {
+		width: 58.33%;
+	}
+	.col-8 {
+		width: 66.66%;
+	}
+	.col-9 {
+		width: 75%;
+	}
+	.col-10 {
+		width: 83.33%;
+	}
+	.col-11 {
+		width: 91.66%;
+	}
+	.col-12 {
+		width: 100%;
+	}
+}
+.col-12.img{
+    min-height:500px;/*圖過小，則容器放大*/
+}
+.col-12.img img {
+    min-height:500px;/*圖過小，則圖放大*/
+    display: inline-block;/*設置圖片為行內塊元素，使其可以水平排列；*/
+    max-width: 100%;/*/*圖過小，則圖縮小*/*/
+    height: auto;/*設置圖片高度為自動，使圖片的高度能夠自適應容器高度；*/
+    width: auto;/*設置圖片寬度為自動，保證圖片的寬度能夠自適應容器的寬度。*/
+    object-fit: contain;/*設置圖片縮放方式為contain，使圖片能夠等比例縮放並且保持在容器內；*/
+    max-height: 900px;/*設置圖片最大高度為900px，保證圖片不會超出容器範圍；*/
+    position: inherit;/*繼承父元素的position屬性，不進行定位；*/
+    /*設置圖片位置，將圖片設置在容器的正中央；*/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;    
+}
+
+/* .col-12.img img {
+    display: block;
+    max-width: 100%;
+    max-height: 900px;
+    height: -webkit-fill-available;
+    object-fit: contain;
+}
+.col-12_img img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: inherit;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+} */
+/* .img-container img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  max-width: 100%;
+  height: auto;
+} */
+
+/* .img-container {
+ display: flex;
+  justify-content: center;
+  align-items: center; 
+    max-width: 50%;
+   height: auto;
+} */
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-gap: 15px;
+	clear: both; /* Add this line */
+	margin-top: 20px;
+	background-color: #fff;
+}
+
+.card {
+  overflow: hidden; /* Ensure the content inside the card does not overflow */
+}
+
+.card-img-top {
+  width: 100%; /* Ensure the image doesn't exceed the container's width */
+  height: auto;/* Maintain the image's aspect ratio */
+  object-fit: cover;/* Ensure the image covers the entire container */
+  display: block;
+}
+
+.filter {
+	position: absolute;
+	background-color: #C4E1FF;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	z-index: 10;/* 确保筛选器在其他元素之上 */
+	right: 0;/* 使sidebar靠右对齐 */
+    color: #000;
+}
+.filter-item {
+	cursor: pointer;
+	padding: 5px;
+}
+
+.filter-item:hover {
+	background-color: #FCFCFC;
+}
+
+.hidden {
+	display: none;
+}
+
+#header a:link, a:visited {
+	color: #ffffff;
+	text-decoration: none;
+	cursor: auto;
+}
+#header a:link:active {
+	color: #ffffff;
+	text-decoration: none;
+}
+#header a:visited:active {
+	color: #ffffff;
+	text-decoration: none;
+}
+#side_menu {
+	color: #000;
+	/* 對應<a class="material-icons" id="side_menu" style="font-size:36px">menu</a> */
+}
+a.toplink{
+    color: #000;/*nav word(第二導航欄的字)*/
+    text-decoration: none;
+}
+a.col-4.title {
+    color: blue;
+    text-decoration: none;
+}
+a.card-title {
+    color: blue;
+    text-decoration: none;
+    font-weight:bold;
+}
+a.card-url {
+    color: #66B3FF;
+    text-decoration: none;
+}
+
+.top_img {/*活動詳細頁面的大圖*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+.col-12.img img {/*活動詳細頁面的大圖*/
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    
+}
+.col-12.titleAndcontent_IL {
+  border: 3px solid #ccc;
+}
+
+.content-base_tit {
+    text-align: center;
+    font-weight:bold;
+    font-size: 20px;
+    line-height: 3;
+}
+
+.hidden-item {
+  display: none;
+}
+/*
+.grid-item {
+  width: 30%;
+}
+
+
+.grid {
+   width: 100%;
+   margin: 0px auto;
+   column-count: 3;
+   /*欄數/
+   column-gap: 10px;
+   /*每欄間隔/
+}
+.grid-item {
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 0 auto 5px;
+    break-inside: avoid;
+    /*定義頁面、列或是區域發生中斷時的元素表現方式。 auto->元素中斷、acoid->元素不中斷/
+}
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+*/
+/*
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 200px; /* 調整這個值以獲得所需的圖片容器高度 /
+}
+
+.card-img-top {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+*/

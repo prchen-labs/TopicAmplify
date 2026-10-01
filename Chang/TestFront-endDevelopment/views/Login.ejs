@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>活動大聲公 - 登入</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js">
+	</script>
+	<script src="https:redacted-user@example.com/dist/ionicons/ionicons.esm.js" type="module">
+	</script>
+	<script src="https:redacted-user@example.com/dist/ionicons/ionicons.js">
+	</script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="/LogReg.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<a class="left-content col-4 col-s-3" href="/"><img src="./loud-speaker.png">
+		<div style="padding-left:25px">
+			活動大聲公
+		</div></a>
+	</div>
+	<div class="container">
+		<div class="login-box">
+			<h1>Login</h1>
+			<form action="/login" method="post">
+				<div class="input">
+					<span class="icon"></span> <input class="item" id="username" name="username" type="text"> <label>帳號</label>
+				</div>
+                <% if (errorMessage=='Incorrect username.') { %>
+                    <div class="error-message">
+                        <p id="wrong-username-message" >找不您的帳號</p>
+                    </div>
+                <% } %>
+				<div class="input">
+					<span class="icon"></span> <input class="item" id="password" name="password" type="password"> <label>密碼</label>
+				</div>
+               <% if (errorMessage=='Incorrect password.') { %>
+                    <div class="error-message">
+                        <p id="wrong_password_hint" >密碼輸入錯誤</p>
+                    </div>
+                <% } %>
+				<div class="help">
+					<a href="#">忘記密碼?</a>
+				</div><button class="buttonLogin" id="loginButton">登入</button>
+				<div class="register">
+					<a class="register-link" href="/Register">註冊帳號</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

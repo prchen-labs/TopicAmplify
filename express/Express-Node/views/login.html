@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" type="text/css" href="../public/login.css">
+        <title>活動大聲公</title>
+    
+        <style type="text/css">
+            body {
+                height: 100vh;
+                width: 100%;
+                background: linear-gradient(-50deg, rgb(157, 78, 203), rgb(74, 66, 234), rgb(35, 243, 243), rgb(237, 104, 94));
+                background-size: 400% 400%;
+            }
+
+            .login-container {
+                height: 370px;
+                width: 500px;
+                position: absolute;
+                background: rgba(255, 255, 255, 60%);
+                box-shadow: 0 0 5px 0px black;
+                border-radius: 15px;
+                top: 50%;
+                left: 50%;
+                margin-top: -180px;
+                margin-left: -250px;
+                display: flex;    
+            }
+
+            .box {
+                height: 370px;
+                width: 500px;
+                background: white;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                border-radius: 15px;
+            }
+
+            .box h1 {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .box .item {
+                height: 20px;
+                width: 300px;
+                padding: 6px;
+                margin: 30px 100px;
+                border: none;
+                font-size: 20px;
+                border-bottom: 1px solid black;
+                outline: none;
+            }
+
+            .box .button {
+                height: 30px;
+                width: 150px;
+                background: linear-gradient(20deg, rgb(157, 78, 203), rgb(74, 66, 234), rgb(24, 198, 198), rgb(237, 104, 94));;
+                transform: translateX(184px);
+                margin-top: 10px;
+                align-self: center;
+                border: none;
+                border-radius: 15px;
+                font-size: 20px;
+                color: azure;
+                cursor: pointer;
+                box-shadow: 5px 5px 5px #8888;
+            }
+
+            .box .button:hover {
+                opacity: 80%;
+            }
+
+            .help {
+                display: flex;
+                margin-top: -90px;
+                transform: translateX(230px);
+                font-size: 13px;
+            }
+
+            .register {
+                width: 100px;
+                display: flex;
+                font-size: 15px;
+                transform: translateX(430px);
+                margin: 40px -10px;
+            }
+        </style>
+ 
+  
+    </head>
+
+    <body>
+        <div class="login-container">
+            <div class="box">
+                <form action="/login" method="post">
+                    <h1>Login</h1>
+                    <input type="text" name="username" class="item" id="username" placeholder="帳號" required>
+                    <input type="password" name="password" class="item" id="passwd" placeholder="密碼" required>
+                    <input type="submit" value="登入" class="button" onclick="enter();">
+                </form>
+                <div class="register">
+                    <a href="register">註冊帳號</a>
+                </div>
+                <div class="help">
+                    <a href="">忘記密碼?</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

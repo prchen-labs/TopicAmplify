@@ -1,0 +1,36 @@
+# Bundled dependencies, including the node_modules0000 backup
+node_modules*/
+.npm/
+
+# Local environment and private keys
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Database dumps and backup archives
+ChenBackupMongoDB/
+*.bson
+*.zip
+*.tgz
+*.tar
+*.gz
+*.7z
+*.mini/
+
+# Python and notebook generated files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Add paths for private datasets and generated crawl output after review.
+# Keep package.json, package-lock.json, source, and approved sample data.

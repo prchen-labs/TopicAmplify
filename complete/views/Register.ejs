@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動大聲公</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="module" src="https:redacted-user@example.com/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https:redacted-user@example.com/dist/ionicons/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/LogReg.css" type="text/css" rel="stylesheet">
+    <script src="/LogReg.js"></script>
+ 
+</head>
+
+<body>
+    <div id="header">
+        <a class="left-content col-4 col-s-3" href="/index">
+            <img src="./loud-speaker.png"/>
+            <div style="padding-left:25px">活動大聲公</div>
+        </a> 
+    </div>
+    
+    <div class="container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form action="/register" method="post">
+                <div class="input">
+                    <span class="icon"><ion-icon name="person-sharp"></ion-icon></span>
+                    <input type="text" name="username" id="username" class="item">
+                    <label>帳號</label>
+                </div>
+
+                <div class="input">
+                    <span class="icon"><ion-icon name="lock-closed-sharp"></ion-icon></span>
+                    <input type="password" name="password" id="password" class="item">
+                    <label>密碼</label>
+                </div>
+                
+                <div class="input">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" name="email" id="email" class="item">
+                    <label>電信信箱</label>
+                </div>
+
+                <button class="buttonRegister" onclick="signUpcheck()">註冊</button>
+                <div class="register">
+                    <a href="/Login" class="register-link" onclick="signUpcheck()">登入帳號</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

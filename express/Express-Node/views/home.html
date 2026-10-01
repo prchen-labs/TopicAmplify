@@ -1,0 +1,804 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script> 
+        <title>Search text</title>
+        
+        <script>
+            var h,w;
+            var WindowsSize=function(){
+                h=$(window).height();
+                w=$(window).width();
+            };
+            function SearchBox_show(){
+                $(".left-content").animate({
+                    opacity: 'hide',
+                });
+                $(".right-content").animate({
+                    opacity: 'hide',
+                });
+                $(".center-content").animate({
+                    width: '100%',
+                    opacity: '100',
+                });
+                $("#search-box").animate({
+                    width: '90%',
+                    opacity: '100',
+                });
+                $("#back").show();
+            }
+            function SearchBox_hide(){
+                //hide
+                $(".left-content, .right-content").stop().show("fade");
+                $(".center-content, #search-box").css({width: '', opacity: ''});
+                $("#back").hide();
+
+            }
+            $(document).ready(function(){
+                WindowsSize();
+                $("#back").hide();
+                $("#back").click(function(){
+                    SearchBox_hide();
+                });
+                $("#search-button").click(function(){
+                    if($("#search-box").val()==""){
+                        if(w < 768) SearchBox_show();
+                    }else{
+                        alert("search");
+                    }
+                });	
+                $("#side_menu").click(function(){
+                    $("#sidebar").toggle();
+                    if(w > 1200){
+                        $("#content").show();
+                    }else{
+                        $("#content").toggle();
+                    }		
+                });
+                /*
+                const content = document.querySelector("#content");
+                const sidebar = document.querySelector("#sidebar");
+                const toggleButton = document.querySelector("#side_menu");
+
+                function handleResize() {
+                  if (window.innerWidth <= 1200) {
+                    content.style.display = "none";
+                    sidebar.style.width = "100%";
+                  } else {
+                    content.style.display = "block";
+                    sidebar.style.width = "30%";
+                  }
+                }
+                window.addEventListener("resize", handleResize);
+                */
+            });
+           $(window).resize(WindowsSize); 
+
+        </script>
+
+        
+        <script>
+            const userTemplate = document.querySelector("[data-user-template]");
+            const userContainer = document.querySelector("[data-user-view-container]");
+            const searchInput = document.querySelector("[data-search]");
+
+            let users = [];
+
+            searchInput.addEventListener("input", (event) => {
+                const value = event.target.value.toLowerCase();
+                users.forEach(user => {
+                    const Visible = user.title.toLowerCase().includes(value) || user.content.toLowerCase().includes(value);
+                    user.element.classList.toggle("hide", !Visible);
+                })
+            })
+
+            fetch("mongodb://127.0.0.1:27017/activity-collection/searches")
+            .then(res => res.json())
+            .then(data => {
+                users = data.map(user => {
+                    const list = userTemplate.textContent.cloneNode(true).children[0];
+                    const title = card.querySelector("[data-title]");
+                    const content = card.querySelector("[data-content]");
+                    title.textContent = user.title;
+                    content.textContent = user.content;
+                    userContainer.append(list);
+                    return { title: user.title, content: user.content, element: card };
+                })
+
+            })
+        </script>
+        
+        <style>
+            html,body { height:100%; padding:0;margin:0;}
+
+            * {
+            box-sizing: border-box;
+            }
+
+            .row::after {
+            content: "";
+            clear: both;
+            display: table;
+            }
+
+            html {
+            font-family: "Lucida Sans", sans-serif;
+            background-color: #a8d6af;
+            }
+
+            #header {
+            background-color: #26502c;
+            color: #ffffff;
+            padding: 15px;
+            display: flex;
+            font-weight:bold;
+            /*font-family: DFKai-sb;*/
+            }
+
+            #header a:link, a:visited {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: auto;
+            }
+
+            #header a:link:active, a:visited:active {
+            color: #ffffff;
+            }
+
+            #header .icon {
+            font-size:48px;
+            }
+
+            #header .left-content {
+            font-size: 39px;
+            box-sizing: border-box;
+            position: relative;
+            right: 0;
+            display: flex;
+            justify-content: start;
+            height: 64px;
+            padding: 8px;
+            }
+
+            #header .center-content {
+            box-sizing: border-box;
+            position: relative;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            height: 64px;
+            padding: 8px;
+            }
+
+            #header .right-content {
+            box-sizing: border-box;
+            position: relative;
+            right: 0;
+            display: flex;
+            justify-content: end;
+            height: 64px;
+            padding: 8px;
+            }
+
+            #header .right-content:after {
+            content: "";
+            clear: both;
+            display: table;
+            }
+
+            #header:after {
+            content: "";
+            clear: both;
+            display: table;
+            }
+
+            .topnav{
+                width:100%;
+                height:50px;
+                font-size:30px;
+                background-color: #88b1d7;
+                color: #282A35;
+                padding:12px;
+                overflow:hidden;
+            }
+            .toplink{	
+                padding-left:18px;
+                padding-right:18px;
+            }
+            #sidebar {
+                position: relative;
+                float:left;
+                height:calc(100% - 154px);
+                background-color: #8c472c;
+            }
+
+            #content {
+                float:left;
+                height:calc(100% - 154px);
+                background-color: #a8d6af;
+                padding:5px;
+
+            }
+
+            #content div{
+                float:left;
+                border: 3px solid #8AC007;
+                margin:3px;
+            }
+
+            #content p{
+                float:left;	
+                padding:5px;
+            }
+
+            #content .title{
+                font-size:large;
+                font-weight:bold;
+            }
+
+            #content .summary{
+                border-style: none solid none solid;
+                border-width: 2px;
+            }
+
+            #content .time{
+                font-weight:bold;
+            }
+
+            #select_bar{
+            box-sizing: border-box;
+            position: absolute;
+            width:100%;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            height: 64px;
+            bottom: 0px;
+            border: 3px solid #8AC007;
+            }
+            /* For mobile phones: */
+            [class*="col-"] {
+            width: 100%;
+            }
+
+            @media only screen and (max-width: 768px) {
+            #header .left-content img {width:auto;}
+            #header .left-content{font-size: 0px;}
+            #header .center-content #search-box{width:0;opacity:0;}
+            #sidebar  {display:none;}
+            .col-s-1 {width: 8.33%;}
+            .col-s-2 {width: 16.66%;}
+            .col-s-3 {width: 25%;}
+            .col-s-4 {width: 33.33%;}
+            .col-s-5 {width: 41.66%;}
+            .col-s-6 {width: 50%;}
+            .col-s-7 {width: 58.33%;}
+            .col-s-8 {width: 66.66%;}
+            .col-s-9 {width: 75%;}
+            .col-s-10 {width: 83.33%;}
+            .col-s-11 {width: 91.66%;}
+            .col-s-12 {width: 100%;}
+            }
+
+
+            @media only screen and (min-width: 768px) {
+            /* For tablets: */
+            #header .left-content img {width:0;}
+            #header .left-content{font-size: 39px;}
+            #header .center-content #search-box{width:90%;opacity:100;}
+            #sidebar  {display:none;}
+            }
+
+            @media (max-width: 1200px) {
+            #sidebar {
+                display: none;
+            }
+            #content {
+                width: 100%;
+            }
+            }
+
+            @media only screen and (min-width: 1200px) {
+            /* For desktop: */
+            .left-content img {width:auto;}
+            #header .left-content img {width:auto;}
+            #header .left-content{font-size: 39px;}
+            #header .center-content #search-box{width:90%;opacity:100;}
+            #sidebar  {display:block;}
+            .col-1 {width: 8.33%;}
+            .col-2 {width: 16.66%;}
+            .col-3 {width: 25%;}
+            .col-4 {width: 33.33%;}
+            .col-5 {width: 41.66%;}
+            .col-6 {width: 50%;}
+            .col-7 {width: 58.33%;}
+            .col-8 {width: 66.66%;}
+            .col-9 {width: 75%;}
+            .col-10 {width: 83.33%;}
+            .col-11 {width: 91.66%;}
+            .col-12 {width: 100%;}
+            }
+
+            .user-view {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+                gap: .40rem;
+                margin-top: 1rem;
+            }
+/*
+            .card {
+                border: 1px solid black;
+                background-color: white;
+                padding: .5rem;
+            }
+
+            .card .title {
+                margin-bottom: .30rem;
+                font-size: 1.5rem;
+            }
+
+            .card .content {
+                font-size: 1rem;
+                color: #777;
+            }
+*/
+            .hide {
+                display: none;
+            }
+     
+        </style>
+        
+    </head>
+
+    <body>
+        <div id="header">
+             <a class="left-content col-4 col-s-3" href="#">
+                <img src="./loud-speaker.png"/>
+	            <div style="padding-left:25px">活動大聲公</div>
+            </a>
+
+            <div class=" center-content col-8 col-s-6">
+                <div id="back" class="material-icons icon">arrow_back</div>
+                <input id="search-box" class="in" type="search" data-search/>
+                <div id="search-button" class="material-icons icon">search</div>
+            </div>
+
+            <div class="right-content col-2 col-s-3">
+                <a class="material-icons icon" href="login">account_circle</a>
+            </div>  
+        </div>
+
+        <div class="col-12 topnav">
+            <div style="float:left;width:calc(100% - 39px)">
+                <a class="toplink">AAA</a>
+                <a class="toplink">BBB</a>
+                <a class="toplink">CCC</a>
+                <a class="toplink">DDD</a>
+                <a class="toplink">EEE</a>
+                <a class="toplink">FFF</a>
+            </div>
+            <div style="float:right;width:39px">
+                <a id="side_menu" class="material-icons" style="font-size:36px">menu</a>
+            </div>
+        </div>
+
+        <div class="user-view" data-user-view-container></div>
+            <div class="col-12">
+                <p class="col-4 title">研發前專利檢索概念與WIPS GLOBAL教育訓練</p>
+                <p class="col-6 summary">為提升本校專利質量與加速業務流程，說明本校專利補助業務流程與注意事項，由成功大學企業關係與技轉中心林意茵經理主講優化機制及表單說明。</p>
+                <p class="col-2 time">2023年2月24日下午</p>
+            </div>
+            <div class="col-12">
+                <p class="col-4 title">研發前專利檢索概念與WIPS GLOBAL教育訓練</p>
+                <p class="col-6 summary">為提升本校專利質量與加速業務流程，說明本校專利補助業務流程與注意事項，由成功大學企業關係與技轉中心林意茵經理主講優化機制及表單說明。</p>
+                <p class="col-2 time">2023年2月24日下午</p>
+            </div>
+            <div class="col-12">
+                <p class="col-4 title">研發前專利檢索概念與WIPS GLOBAL教育訓練</p>
+                <p class="col-6 summary">為提升本校專利質量與加速業務流程，說明本校專利補助業務流程與注意事項，由成功大學企業關係與技轉中心林意茵經理主講優化機制及表單說明。</p>
+                <p class="col-2 time">2023年2月24日下午</p>
+            </div>
+        <template data-user-template>
+            <div class="card">
+                <div class="title" data-title></div>
+                <div class="content" data-content></div>
+            </div>
+        </template>
+
+    </body>
+</html>
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="../public/rwd.css" type="text/css" rel="stylesheet">
+
+<style>
+	html,body { height:100%; padding:0;margin:0;}
+
+	* {
+	box-sizing: border-box;
+	}
+
+	.row::after {
+	content: "";
+	clear: both;
+	display: table;
+	}
+
+	html {
+	font-family: "Lucida Sans", sans-serif;
+	background-color: #a8d6af;
+	}
+
+	#header {
+	background-color: #26502c;
+	color: #ffffff;
+	padding: 15px;
+	display: flex;
+	font-weight:bold;
+	/*font-family: DFKai-sb;*/
+	}
+
+	#header a:link, a:visited {
+	color: #ffffff;
+	text-decoration: none;
+	cursor: auto;
+	}
+
+	#header a:link:active, a:visited:active {
+	color: #ffffff;
+	}
+
+	#header .icon {
+	font-size:48px;
+	}
+
+	#header .left-content {
+	font-size: 39px;
+	box-sizing: border-box;
+	position: relative;
+	right: 0;
+	display: flex;
+	justify-content: start;
+	height: 64px;
+	padding: 8px;
+	}
+
+	#header .center-content {
+	box-sizing: border-box;
+	position: relative;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	height: 64px;
+	padding: 8px;
+	}
+
+	#header .right-content {
+	box-sizing: border-box;
+	position: relative;
+	right: 0;
+	display: flex;
+	justify-content: end;
+	height: 64px;
+	padding: 8px;
+	}
+
+	#header .right-content:after {
+	content: "";
+	clear: both;
+	display: table;
+	}
+
+	#header:after {
+	content: "";
+	clear: both;
+	display: table;
+	}
+
+	.topnav{
+		width:100%;
+		height:50px;
+		font-size:30px;
+		background-color: #88b1d7;
+		color: #282A35;
+		padding:12px;
+		overflow:hidden;
+	}
+	.toplink{	
+		padding-left:18px;
+		padding-right:18px;
+	}
+	#sidebar {
+		position: relative;
+		float:left;
+		height:calc(100% - 154px);
+		background-color: #8c472c;
+	}
+
+	#content {
+		float:left;
+		height:calc(100% - 154px);
+		background-color: #a8d6af;
+		padding:5px;
+
+	}
+
+	#content div{
+		float:left;
+		border: 3px solid #8AC007;
+		margin:3px;
+	}
+
+	#content p{
+		float:left;	
+		padding:5px;
+	}
+
+	#content .title{
+		font-size:large;
+		font-weight:bold;
+	}
+
+	#content .summary{
+		border-style: none solid none solid;
+		border-width: 2px;
+	}
+
+	#content .time{
+		font-weight:bold;
+	}
+
+	#select_bar{
+	box-sizing: border-box;
+	position: absolute;
+	width:100%;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	height: 64px;
+	bottom: 0px;
+	border: 3px solid #8AC007;
+	}
+	/* For mobile phones: */
+	[class*="col-"] {
+	width: 100%;
+	}
+
+	@media only screen and (max-width: 768px) {
+	#header .left-content img {width:auto;}
+	#header .left-content{font-size: 0px;}
+	#header .center-content #search-box{width:0;opacity:0;}
+	#sidebar  {display:none;}
+	.col-s-1 {width: 8.33%;}
+	.col-s-2 {width: 16.66%;}
+	.col-s-3 {width: 25%;}
+	.col-s-4 {width: 33.33%;}
+	.col-s-5 {width: 41.66%;}
+	.col-s-6 {width: 50%;}
+	.col-s-7 {width: 58.33%;}
+	.col-s-8 {width: 66.66%;}
+	.col-s-9 {width: 75%;}
+	.col-s-10 {width: 83.33%;}
+	.col-s-11 {width: 91.66%;}
+	.col-s-12 {width: 100%;}
+	}
+
+
+	@media only screen and (min-width: 768px) {
+	/* For tablets: */
+	#header .left-content img {width:0;}
+	#header .left-content{font-size: 39px;}
+	#header .center-content #search-box{width:90%;opacity:100;}
+	#sidebar  {display:none;}
+	}
+
+	@media (max-width: 1200px) {
+	#sidebar {
+		display: none;
+	}
+	#content {
+		width: 100%;
+	}
+	}
+
+	@media only screen and (min-width: 1200px) {
+	/* For desktop: */
+	.left-content img {width:auto;}
+	#header .left-content img {width:auto;}
+	#header .left-content{font-size: 39px;}
+	#header .center-content #search-box{width:90%;opacity:100;}
+	#sidebar  {display:block;}
+	.col-1 {width: 8.33%;}
+	.col-2 {width: 16.66%;}
+	.col-3 {width: 25%;}
+	.col-4 {width: 33.33%;}
+	.col-5 {width: 41.66%;}
+	.col-6 {width: 50%;}
+	.col-7 {width: 58.33%;}
+	.col-8 {width: 66.66%;}
+	.col-9 {width: 75%;}
+	.col-10 {width: 83.33%;}
+	.col-11 {width: 91.66%;}
+	.col-12 {width: 100%;}
+	}
+</style>
+
+<script>
+    var h,w;
+    var WindowsSize=function(){
+        h=$(window).height();
+        w=$(window).width();
+    };
+	function SearchBox_show(){
+	    $(".left-content").animate({
+			opacity: 'hide',
+        });
+		$(".right-content").animate({
+			opacity: 'hide',
+        });
+		$(".center-content").animate({
+			width: '100%',
+			opacity: '100',
+		});
+		$("#search-box").animate({
+			width: '90%',
+			opacity: '100',
+		});
+		$("#back").show();
+	}
+	function SearchBox_hide(){
+		//hide
+		$(".left-content, .right-content").stop().show("fade");
+		$(".center-content, #search-box").css({width: '', opacity: ''});
+		$("#back").hide();
+		
+	}
+	$(document).ready(function(){
+	    WindowsSize();
+		$("#back").hide();
+		$("#back").click(function(){
+			SearchBox_hide();
+		});
+		$("#search-button").click(function(){
+			if($("#search-box").val()==""){
+			    if(w < 768) SearchBox_show();
+		    }else{
+			    alert("search");
+		    }
+		});	
+		$("#side_menu").click(function(){
+			$("#sidebar").toggle();
+			if(w > 1200){
+				$("#content").show();
+			}else{
+				$("#content").toggle();
+			}		
+		});
+		/*
+		const content = document.querySelector("#content");
+		const sidebar = document.querySelector("#sidebar");
+		const toggleButton = document.querySelector("#side_menu");
+
+		function handleResize() {
+		  if (window.innerWidth <= 1200) {
+			content.style.display = "none";
+			sidebar.style.width = "100%";
+		  } else {
+			content.style.display = "block";
+			sidebar.style.width = "30%";
+		  }
+		}
+		window.addEventListener("resize", handleResize);
+		*/
+	});
+   $(window).resize(WindowsSize); 
+   
+</script>
+
+</head>
+
+<body>
+<form action="/search" method="POST">
+<div id="header">
+  <a class="left-content col-4 col-s-3" href="#">
+    <img src="./loud-speaker.png"/>
+	<div style="padding-left:25px">活動大聲公</div>
+  </a> 
+  <div class=" center-content col-8 col-s-6">
+    <div id="back" class="material-icons icon">arrow_back</div>
+        <input id="search-box" class="in" type="search"/>
+        <div id="search-button" class="material-icons icon" >search</div>
+ </form>
+  </div>
+  <div class="right-content col-2 col-s-3">
+    <a class="material-icons icon" href="login">account_circle</a>
+  </div>  
+</div>
+<div class="col-12 topnav">
+    <div style="float:left;width:calc(100% - 39px)">
+		<a class="toplink">AAA</a>
+		<a class="toplink">BBB</a>
+		<a class="toplink">CCC</a>
+		<a class="toplink">DDD</a>
+		<a class="toplink">EEE</a>
+		<a class="toplink">FFF</a>
+	</div>
+	<div style="float:right;width:39px">
+		<a id="side_menu" class="material-icons" style="font-size:36px">menu</a>
+	</div>
+</div>
+<div id="content" class="col-9">
+	<h1>推薦</h1>
+	<div class="col-12">
+		<p class="col-4 title">研發前專利檢索概念與WIPS GLOBAL教育訓練</p>
+		<p class="col-6 summary">為提升本校專利質量與加速業務流程，說明本校專利補助業務流程與注意事項，由成功大學企業關係與技轉中心林意茵經理主講優化機制及表單說明。</p>
+		<p class="col-2 time">2023年2月24日下午</p>
+	</div>
+	<div class="col-12">
+		<p class="col-4 title">研發前專利檢索概念與WIPS GLOBAL教育訓練</p>
+		<p class="col-6 summary">為提升本校專利質量與加速業務流程，說明本校專利補助業務流程與注意事項，由成功大學企業關係與技轉中心林意茵經理主講優化機制及表單說明。</p>
+		<p class="col-2 time">2023年2月24日下午</p>
+	</div>
+	<div class="col-12">
+		<p class="col-4 title">研發前專利檢索概念與WIPS GLOBAL教育訓練</p>
+		<p class="col-6 summary">為提升本校專利質量與加速業務流程，說明本校專利補助業務流程與注意事項，由成功大學企業關係與技轉中心林意茵經理主講優化機制及表單說明。</p>
+		<p class="col-2 time">2023年2月24日下午</p>
+	</div>
+</div>
+<div id="sidebar" class="col-3 col-s-12">
+	<div id="select_bar">
+		<button id="reset" style="width:50%">重置</button>
+		<button id="filte" style="width:50%">篩選</button>
+	</div>
+</div>
+<!--
+<div class="row">
+  <div class="col-3 col-s-3 menu">
+    <ul>
+      <li>The Flight</li>
+      <li>The City</li>
+      <li>The Island</li>
+      <li>The Food</li>
+    </ul>
+  </div>
+
+  <div class="col-6 col-s-9">
+    <h1>The City</h1>
+    <p>Chania is the capital of the Chania region on the island of Crete. The city can be divided in two parts, the old town and the modern city.</p>
+  </div>
+
+  <div class="col-3 col-s-12">
+    <div class="aside">
+      <h2>What?</h2>
+      <p>Chania is a city on the island of Crete.</p>
+      <h2>Where?</h2>
+      <p>Crete is a Greek island in the Mediterranean Sea.</p>
+      <h2>How?</h2>
+      <p>You can reach Chania airport from all over Europe.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Resize the browser window to see how the content respond to the resizing.</p>
+</div>
+-->
+</body>
+</html>
+
+

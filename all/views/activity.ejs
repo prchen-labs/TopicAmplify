@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>活動大聲公</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+	</script>
+     <!-- 引用 jQuery 库 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="/rwd.css" rel="stylesheet" type="text/css">
+	<script src="/main.js" type="text/javascript">
+	</script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+	</script>
+    <!-- 引用 Masonry 库 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js">
+	</script>
+   
+
+</head>
+<body>
+	<form action="/search" method="post">
+		<div id="header">
+			<a class="left-content col-4 col-s-3" href="https://www.topicamplify.com:6002/"><img src="/loud-speaker.png">
+			<div style="padding-left:25px">
+				活動大聲公
+			</div></a>
+			<div class=" center-content col-8 col-s-6">
+				<div class="material-icons icon" id="back">
+					arrow_back
+				</div><input class="in" id="search-box" name="keyword" type="text">
+				<div class="material-icons icon" id="search-button">
+					search
+				</div>
+			</div>
+			<div class="right-content col-2 col-s-3">
+				<a class="material-icons icon" href="/login">account_circle</a>
+			</div>
+		</div>
+	</form>
+	<div class="col-12 topnav">
+		<div style="float:left;width:calc(100% - 39px)">
+			<a class="toplink" href="#">課程</a> 
+            <a class="toplink" href="#">競賽</a> 
+            <a class="toplink" href="#">徵才</a> 
+            <a class="toplink" href="#">講座</a>
+		</div>
+		<div style="float:right;width:39px">
+			<a class="material-icons" id="side_menu" style="font-size:36px">menu</a>
+		</div>
+	</div>
+	<div class="filter hidden" id="filter">
+		<div class="filter-item" data-filter="課程">課程</div>
+		<div class="filter-item" data-filter="競賽">競賽</div>
+		<div class="filter-item" data-filter="徵才">徵才</div>
+		<div class="filter-item" data-filter="講座">講座</div>
+	</div>
+	<div class="img-container top_img">
+		<div class="col-12 img col-12_img">
+            <% 
+            let example_url=["https://handheart.com.tw/wp-content/uploads/2018/08/170327-%E6%AD%8C%E5%94%B1%E6%AF%94%E8%B3%BD-02-e1546486281695.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAv8RVvMGB99NQMHzQIuh0EgPBhTDcdpYkXEpv2fQPqA&s","https://thumb.photo-ac.com/98/9829d73d30e7c23be57f889e24531136_t.jpeg","/loud-speaker.png"];
+            let randomIndex = Math.floor(Math.random() * example_url.length);
+            %>
+            <img alt="" src="<%=example_url[randomIndex];%>">
+        </div><!--"<%= activity.img %>"-->
+	</div>
+	<div class="col-12 titleAndcontent_OL">
+		<div class="col-12 titleAndcontent_IL">
+			<h1><%= activity.title %></h1>
+            <% for (const line of activity.content) { %>
+              <pre style="white-space: pre-wrap;"><%- line %></pre>
+            <% } %>
+            <!--
+                <p class="col-12 time"><%= activity.time %></p>
+            -->
+		</div><!--
+            <div class="col-12">
+                <p><strong>活動地點：</strong><%= activity.location %></p>
+                <p><strong>活動費用：</strong><%= activity.fee %></p>
+                <p><strong>活動人數上限：</strong><%= activity.max_participants %></p>
+                <p><strong>報名截止日期：</strong><%= activity.registration_deadline %></p>
+                <p><strong>活動聯絡人：</strong><%= activity.contact %></p>
+                <p><strong>聯絡人電話：</strong><%= activity.contact_phone %></p>
+                <p><strong>聯絡人信箱：</strong><%= activity.contact_email %></p>
+            </div>?
+            -->
+	</div>
+	<p class='content-base_tit'>相似的活動</p>
+	<div class="container">
+		<div class="grid">
+			<%for (let i = 0; i <similar_activity.length; i++) { 
+			         
+			         %>
+  <div class="col-md-4 col-sm-6 col-xs-12 mb-4 grid-item <%= i >= 9/*initialItemsToShow*/ ? 'hidden-item' : '' %>">
+				<div class="card h-100 shadow-sm">
+					<img alt="圖片連線錯誤" class="card-img-top" src="<%=example_url[randomIndex];%>">
+					<div class="card-body">
+						<a class="card-title" href="<%=similar_activity[i]._id%>"><%= similar_activity[i].title %></a>
+						<div class="d-flex justify-content-between align-items-center">
+							<small class="card-time"><%= similar_activity[i].time %></small>
+							<div class="btn-block">
+								<a class="card-url" href="<%=similar_activity[i].url%>">前往官網</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><%} %>
+		</div>
+	</div>
+</body>
+</html>
