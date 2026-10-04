@@ -13,7 +13,7 @@ Bundled dependencies, MongoDB dumps, generated crawl datasets, model artifacts, 
 
 ## Configuration
 
-Embedded mail passwords, a saved crawler cookie, and JWT/session secrets have been replaced with calls to `config/required-env.cjs`. The helper rejects missing or empty configuration. Variable names are documented in `.env.example`; supply actual values through your shell or a secret manager. Node does not automatically load this example file. Each variant has its own package manifest. The lockfiles preserve historical dependency versions and must be reviewed and updated before use.
+Embedded mail passwords, a saved crawler cookie, and JWT/session secrets have been replaced with calls to `config/required-env.cjs`. The helper rejects missing or empty configuration. The CKIP constituency-parser credentials in the Python notebooks and scripts are read from the `CKIP_USERNAME` and `CKIP_PASSWORD` environment variables (a missing variable raises `KeyError`; an empty value is not rejected). Variable names are documented in `.env.example`; supply actual values through your shell or a secret manager. Node does not automatically load this example file. Each variant has its own package manifest. The lockfiles preserve historical dependency versions and must be reviewed and updated before use.
 
 ## Security status
 
@@ -21,7 +21,7 @@ The original expanded backup received a ClamAV scan with zero detections on 2026
 
 Known issues requiring repair before operation include unauthenticated Python socket deserialization through `pickle.loads`, unescaped EJS output, old dependencies with published vulnerability advisories, and incomplete account-verification/session protections. Do not expose the historical services to a network before addressing these issues.
 
-No credentials are distributed here. Any credentials previously embedded in the backup must be revoked or rotated by their account owner before reuse. Configuration replacements do not revoke those credentials.
+The current working tree contains no credentials. Any credentials previously embedded in the backup must be revoked or rotated by their account owners before reuse; configuration replacements do not revoke them. In particular, the first import commit (`8011b58`) still contains two sets of CKIP parser credentials in its history, so anyone with access to this repository's history can read them. Changing those passwords is the only reliable fix; rewriting history does not remove copies that others may already have.
 
 ## Reproducibility and ownership
 

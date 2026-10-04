@@ -9,7 +9,7 @@ from ckipnlp.pipeline import CkipPipeline, CkipDocument
 from collections import Counter
 import re
 import json
-pipeline = CkipPipeline(opts={'con_parser': {'username': "infoamplify", 'password': "2223pj[DB]"}})
+pipeline = CkipPipeline(opts={'con_parser': {'username': os.environ["CKIP_USERNAME"], 'password': os.environ["CKIP_PASSWORD"]}})
 # 無主題式詞 (用在特徵選取後)
 
 # with open("../stopWords/meaningless.json", "r", encoding="utf-8") as f:
@@ -34,7 +34,7 @@ HFW_rank=10 # High Frequency Word only rank to 10 = 關鍵字 = (經特徵選取
 replace_pattern = re.compile(r'^(?=.{2,}).*盃$')
 remove_pattern = re.compile(r'^(?!会|人|金枝演)(^.+社$)$')
 
-# pipeline = CkipPipeline(opts={'con_parser': {'username': "infoamplify", 'password': "2223pj[DB]"}})
+# pipeline = CkipPipeline(opts={'con_parser': {'username': "<CKIP_USERNAME>", 'password': "<CKIP_PASSWORD>"}})
 # pipeline = CkipPipeline()  # create a CKIP pipeline object
 def preprocess_text(text):
     # 刪除英文 CKIP搞不定外文，還會結合在一起標FW
